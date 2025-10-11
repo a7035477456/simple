@@ -1,0 +1,63 @@
+    group haproxy
+    daemon
+    nbthread 8
+
+defaults
+    mode http
+    log global
+    option httplog
+    option http-keep-alive
+    timeout connect 5s
+    timeout client  60s
+    timeout server  60s
+    timeout http-request 10s
+    timeout http-keep-alive 10s
+
+# ===== HTTP (80) =====
+frontend fe_http
+    bind *:80
+    # either serve via nginx on 80 OR redirect to https.
+    # simplest: redirect http->https:
+    http-request redirect scheme https code 301 unless { ssl_fc }
+
+# ===== HTTPS (443, TLS termination) =====
+frontend fe_https
+    bind *:443 ssl crt /etc/haproxy/certs/site.pem
+    option forwardfor
+    http-request set-header X-Forwarded-Proto https
+    # go through the nginx login layer on localhost:41000
+    default_backend be_nginx
+
+# ===== NGINX login layer (Basic Auth handled by nginx) =====
+backend be_nginx
+    balance roundrobin
+    server local_nginx 127.0.0.1:41000 check
+
+# ===== Internal frontend for NGINX to call back into HAProxy =====
+# (nginx proxy_pass http://127.0.0.1:50000;)
+frontend fe_web
+    bind 127.0.0.1:50000
+    mode http
+    option forwardfor
+    http-request set-header X-Forwarded-Host %[req.hdr(Host)]
+    http-request set-header X-Forwarded-Proto https
+    default_backend web_pool
+
+# ===== Backend pool for your simple app =====
+backend web_pool
+    balance roundrobin
+    option httpchk GET /healthz
+    http-check expect status 200
+    server xbox4 192.168.230.204:40000 check
+    server xbox5 192.168.230.205:40000 check
+    server xbox6 192.168.230.206:40000 check
+
+# ===== Optional stats =====
+listen stats
+    bind *:9900
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats admin if TRUE
+
+
