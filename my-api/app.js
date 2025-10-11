@@ -3,11 +3,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import morgan from 'morgan';
 import cors from 'cors';
+import os from 'os';                    // ⬅️ add
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
 
-const app = express();
+const app  = express();
 const PORT = process.env.PORT || 40000;
 const HOST = process.env.HOST || '0.0.0.0';
 
@@ -17,7 +18,9 @@ app.use(cors());
 
 // --- API ---
 app.get('/api/getMessage', (req, res) => {
-  res.json({ message: 'Andrew Ton' });
+  const serverIp = req.socket?.localAddress || '';
+  const hostname = os.hostname();
+  res.json({ message: 'Andrew Ton', serverIp, hostname });
 });
 
 // health check for HAProxy
