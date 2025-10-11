@@ -1,0 +1,23 @@
+{
+  "name": "my-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "start-dev-solo": "NODE_OPTIONS=\"--max-old-space-size=32768\" pm2 start solo-ecosystem.config.cjs",
+    "stop": "pm2 stop vsinglesclubweb",
+    "restart": "pm2 restart vsinglesclubweb",
+    "logs": "pm2 logs vsinglesclubweb"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
+
