@@ -1,0 +1,53 @@
+# dependencies
+node_modules/
+
+# production build
+dist/
+build/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# local env files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+
+# editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# test coverage
+coverage/
+
+# misc
+*.log
+*.tgz
+*.zip
+*.tar.gz
+
+# optional cache folders
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# storybook build
+.out/
+storybook-static/
+
+# temporary files
+tmp/
+temp/
+
