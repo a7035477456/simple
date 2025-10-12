@@ -12,7 +12,7 @@ module.exports = {
       PG_DATABASE:  'simple',
       PG_USER:      'simpleuser',
       PG_PASSWORD:  'CHANGE_ME',
-      PG_PORT:      '5432'
+      PG_PORT:      '50010'
     }
   }]
 };

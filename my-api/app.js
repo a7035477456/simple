@@ -21,10 +21,10 @@ const HOST = process.env.HOST || '0.0.0.0';
    PG_DATABASE : simple
    PG_USER     : simpleuser        // or postgres
    PG_PASSWORD : CHANGE_ME
-   PG_PORT     : 5432
+   PG_PORT     : 50010
 */
 const common = {
-  port: +(process.env.PG_PORT || 5432),
+  port: +(process.env.PG_PORT || 50010),
   database: process.env.PG_DATABASE || 'simple',
   user: process.env.PG_USER || 'postgres',
   password: process.env.PG_PASSWORD || '',
