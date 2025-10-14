@@ -10,8 +10,8 @@ module.exports = {
       PGWRITE_HOST: '192.168.230.203',
       PGREAD_HOST:  '127.0.0.1',
       PG_DATABASE:  'simple',
-      PG_USER:      'simpleuser',
-      PG_PASSWORD:  'CHANGE_ME',
+      PG_USER:      'postgres',
+      PG_PASSWORD:  'zassamjkkj4$',
       PG_PORT:      '50010'
     }
   }]
