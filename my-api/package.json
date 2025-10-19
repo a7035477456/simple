@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon ./app.js",
-    "start": "node ./app.js",
-    "start-dev-solo": "NODE_OPTIONS=\"--max-old-space-size=32768\" pm2 start solo-ecosystem.config.cjs",
+    "start": "pm2 start ecosystem.config.cjs",
+    "start-dev-solo": "NODE_OPTIONS=\"--max-old-space-size=32768\" pm2 start ecosystem.config.cjs",
     "stop": "pm2 stop vsinglesclubweb",
     "restart": "pm2 restart vsinglesclubweb",
     "logs": "pm2 logs vsinglesclubweb"

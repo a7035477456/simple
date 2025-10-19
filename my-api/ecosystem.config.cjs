@@ -3,7 +3,7 @@ module.exports = {
     name: 'vsinglesclubweb',
     script: './app.js',
     exec_mode: 'cluster',
-    instances: 'max',
+    instances: '2', //max is for all avail core*cpus*threads
     env: {
       NODE_ENV: 'production',
       PORT: 40000,
